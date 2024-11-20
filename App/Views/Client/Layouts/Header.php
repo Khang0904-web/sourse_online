@@ -93,7 +93,7 @@ class Header extends BaseView
                                 <!--begin::Logo-->
                                 <div class="app-header-logo d-flex flex-center">
                                     <!--begin::Logo image-->
-                                    <a href="index.html">
+                                    <a href="/">
                                         <img alt="Logo" src="/public/uploads/image/3-removebg-preview.png" width="100%"
                                             height="135px" />
                                     </a>

@@ -93,7 +93,7 @@
         background-color: white;
     }
     .sidebar {
-        width: 80px;
+        width: 82px;
         background-color: rgba(243, 240, 240, 0.897);
         /* border-right: 1px solid #ddd; */
         /* height: 100vh; */
@@ -137,4 +137,21 @@
         border: none;
     }
 
+    .navbar-brand {
+        background-color: rgb(255, 255, 255);
+        /* display: flex;
+        align-items: center;
+        font-size: 24px;
+        margin-left: 20px;
+        color: #000;
+        font-weight: bold; */
+    }
+    .text-sourse{
+        color: white;
+        padding: 10px 10px;
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        margin-right: 70%;
+    }
    
