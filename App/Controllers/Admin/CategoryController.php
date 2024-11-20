@@ -179,9 +179,10 @@ class CategoryController
             NotificationHelper::success( 'delete', 'Xóa loại sản phẩm thành công');
         }
         else{
-            NotificationHelper::success( 'delete', 'Xóa loại sản phẩm thất bại');
+            NotificationHelper::error( 'delete', 'Xóa loại sản phẩm thất bại');
         }
 
         header('location: /admin/categories');
     }
+    
 }
