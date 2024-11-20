@@ -12,7 +12,7 @@ class ContactController
 {
     public function index()
     {
-       Header::render();
+        Header::render();
         Notification::render();
         NotificationHelper::unset();
         ContactPage::render();
