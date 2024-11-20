@@ -93,9 +93,9 @@
         background-color: white;
     }
     .sidebar {
-        width: 100px;
+        width: 80px;
         background-color: rgba(243, 240, 240, 0.897);
-        border-right: 1px solid #ddd;
+        /* border-right: 1px solid #ddd; */
         /* height: 100vh; */
         display: flex;
         flex-direction: column;
