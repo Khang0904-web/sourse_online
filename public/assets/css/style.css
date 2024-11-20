@@ -155,3 +155,38 @@
         margin-right: 70%;
     }
    
+    
+    .search-bar {
+        border: 1px solid #ccc; /* Đường viền */
+        border-radius: 25px; /* Góc bo tròn */
+        background-color: #f9f9f9; /* Nền nhạt */
+        padding: 5px 15px; /* Khoảng cách tổng thể bên trong */
+        position: relative; /* Làm gốc chứa cho biểu tượng */
+        width: 30%;
+        
+    }
+    
+    .search-icon {
+        position: absolute;
+        top: 50%; /* Căn giữa theo chiều dọc */
+        left: 15px; /* Khoảng cách từ viền trái */
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #aaa;
+    }
+    
+    .search-input {
+        border: none;
+        outline: none;
+        width: 100%;
+        padding-left: 35px; /* Tạo khoảng cách để tránh biểu tượng */
+        font-size: 1rem;
+        background-color: transparent; /* Nền trong suốt */
+        
+    }
+    
+    .search-input::placeholder {
+        color: #aaa;
+    }
+    
+   
