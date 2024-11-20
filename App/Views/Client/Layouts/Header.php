@@ -106,56 +106,21 @@ class Header extends BaseView
                                     <!--end::Sidebar toggle-->
                                 </div>
                                 <!--end::Logo-->
-                                <div class="item-nav d-flex flex-lg-grow-1 flex-stack" id="kt_app_header_wrapper">
-                                    <div class="app-header-wrapper d-flex align-items-center justify-content-around justify-content-lg-between flex-wrap gap-6 gap-lg-0 mb-6 mb-lg-0"
-                                        data-kt-swapper="true" data-kt-swapper-mode="{default: 'prepend', lg: 'prepend'}"
-                                        data-kt-swapper-parent="{default: '#kt_app_content_container', lg: '#kt_app_header_wrapper'}">
-                                        <!--begin::Page title-->
-
-                                        <!--end::Page title-->
-                                        <div class="d-flex gap-3 gap-lg-8 flex-wrap">
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                            <div class="rounded d-flex flex-center w-40px h-40px flex-shrink-0 bg-warning">
-                                                <i class="ki-outline ki-abstract-13 fs-2 text-inverse-warning"></i>
+                                <div class="item-nav d-flex flex-lg-grow-1 flex-stack" id="kt_app_header_wrapper">                                 
+                                            
+                                            <div class="container my-4">
+                                                <div class="d-flex gap-3 flex-wrap justify-content-center align-items-center">
+                                                    <div class="search-bar position-relative">
+                                                        <i class="bi bi-search search-icon"></i>
+                                                        <input type="text" 
+                                                            class="search-input" 
+                                                            placeholder="Tìm kiếm khóa học, bài viết, video, ..." 
+                                                            >
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="d-flex flex-column">
-                                                <span class="fw-bold fs-base text-gray-900">Target A</span>
-                                                <span class="fw-semibold fs-7 text-gray-500">Uplift: 64%</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="rounded d-flex flex-center w-40px h-40px flex-shrink-0 bg-warning">
-                                                <i class="ki-outline ki-abstract-13 fs-2 text-inverse-warning"></i>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <span class="fw-bold fs-base text-gray-900">Target A</span>
-                                                <span class="fw-semibold fs-7 text-gray-500">Uplift: 64%</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="rounded d-flex flex-center w-40px h-40px flex-shrink-0 bg-warning">
-                                                <i class="ki-outline ki-abstract-13 fs-2 text-inverse-warning"></i>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <span class="fw-bold fs-base text-gray-900">Target A</span>
-                                                <span class="fw-semibold fs-7 text-gray-500">Uplift: 64%</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="rounded d-flex flex-center w-40px h-40px flex-shrink-0 bg-warning">
-                                                <i class="ki-outline ki-abstract-13 fs-2 text-inverse-warning"></i>
-                                            </div>
-                                            <div class="d-flex flex-column">
-                                                <span class="fw-bold fs-base text-gray-900">Target A</span>
-                                                <span class="fw-semibold fs-7 text-gray-500">Uplift: 64%</span>
-                                            </div>
-                                        </div> -->
-                                        </div>
-                                    </div>
-                                    <!--begin::Navbar-->
+                                           
+                                                                      
                                     <div class="app-navbar flex-shrink-0 gap-2 gap-lg-4">
 
                                         <!--end::Notifications-->
@@ -212,7 +177,7 @@ class Header extends BaseView
                                     data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
                                     <!--begin::Menu-->
                                     <div class="sidebar">
-                                        <a href="#" class="menu-item active">
+                                        <a href="/" class="menu-item active">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                                                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
                                                 <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
