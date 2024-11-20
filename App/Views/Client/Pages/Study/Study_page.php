@@ -20,9 +20,9 @@ class Study_page extends BaseView
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid navbar-1">
                         <a class="navbar-brand" href="#">
-                            <img src="/public/uploads/image/2.jpg" alt="Logo" width="50" height="45px" class="d-inline-block align-text-center">
-                            - Tên Bài Học
+                            <img src="/public/uploads/image/2.jpg" alt="Logo" width="50px" height="45px" class="d-inline-block align-text-center">
                         </a>
+                        <h4 class="text-sourse">Tên Bài Học</h4>
                         <div class="_actions_k7irp_67">
                             <div class="_progress-bar_k7irp_73">
                                 <div class="_pie-wrapper_1iwxq_1 progress-45 style-2" style="--size: 34px; --progress: 0; --bar-width: 2px; --shadow-border-color: #4d4f50;">
