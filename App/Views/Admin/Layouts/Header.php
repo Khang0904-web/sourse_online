@@ -150,6 +150,17 @@ class Header extends BaseView
                                     </ul>
                                 </li>
                                 <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Bài học </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item">
+                                            <a href="/admin/lessons" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Danh sách bài học </span></a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a href="/admin/lessons/create" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Thêm mới bài học </span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item">
                                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Bình luận </span></a>
                                     <ul aria-expanded="false" class="collapse  first-level">
                                         <li class="sidebar-item">
