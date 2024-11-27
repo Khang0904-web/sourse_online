@@ -6,6 +6,7 @@ namespace App\Controllers\Client;
 use App\Helpers\NotificationHelper;
 use App\Models\Category;
 use App\Models\Product;
+use App\Views\Client\abchome;
 use App\Views\Client\Components\Notification;
 use App\Views\Client\Layouts\Footer;
 use App\Views\Client\Home;
@@ -28,6 +29,7 @@ class HomeController
         Notification::render();
         NotificationHelper::unset();
         Home::render($data);
+        // abchome::render($data);
         Footer::render();
     }
 }

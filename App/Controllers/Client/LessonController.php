@@ -6,6 +6,7 @@ use App\Helpers\AuthHelper;
 use App\Helpers\NotificationHelper;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Lesson;
 use App\Models\Product;
 use App\Views\Client\Components\Notification;
 use App\Views\Client\Layouts\Footer;
@@ -14,20 +15,20 @@ use App\Views\Client\Pages\Product\Category as ProductCategory;
 use App\Views\Client\Pages\Product\Detail;
 use App\Views\Client\Pages\Product\Index;
 
-class ProductController
+class LessonController
 {
     // hiển thị danh sách
     public static function index()
     {
-        // $category = new Category();
-        // $categories = $category->getAllCategoryByStatus();
-        
+        $category = new Category();
+        $categories = $category->getAllCategoryByStatus();
+
         $product = new Product();
         $products = $product->getAllProductByStatus();
 
         $data = [
-            'products' => $products
-            // 'categories' => $categories
+            'products' => $products,
+            'categories' => $categories
         ];
         Header::render();
 
@@ -36,7 +37,6 @@ class ProductController
     }
     public static function detail($id)
     {
-        
 
         $product = new Product();
         $product_detail = $product->getOneProductByStatus($id);
@@ -48,7 +48,7 @@ class ProductController
             'product' => $product_detail,
             'comments' => $comments
         ];
-        
+
         Header::render();
 
         Detail::render($data);
@@ -56,20 +56,25 @@ class ProductController
     }
     public static function getProductByCategory($id)
     {
-        $category = new Category();
-        $categories = $category->getAllCategoryByStatus();
+        $category = new Product();
+        $categories = $category->getAllProductByStatus();
 
-        $product = new Product();
-        $products = $product->getAllProductByCategoryAndStatus($id);
+        $product = new Lesson();
+        $products = $product->getAllLessonByCategoryAndStatus($id);
 
         $data = [
-            'products' => $products,
-            'categories' => $categories
+            'lessons' => $products,
+            'products' => $categories
         ];
 
-        
+
         Header::render();
         ProductCategory::render($data);
         Footer::render();
     }
+
+
+
+    
+
 }
