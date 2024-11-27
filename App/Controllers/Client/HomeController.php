@@ -5,6 +5,7 @@ namespace App\Controllers\Client;
 
 use App\Helpers\NotificationHelper;
 use App\Models\Category;
+use App\Models\CourseModel;
 use App\Models\Product;
 use App\Views\Client\Components\Notification;
 use App\Views\Client\Layouts\Footer;
@@ -16,18 +17,25 @@ class HomeController
     // hiển thị danh sách
     public static function index()
     {
-       
-        $product = new Product();
-        $products = $product->getAllProductByStatus();
 
+        // $product = new Product();
+        // $products = $product->getAllProductByStatus();
+
+        // $data = [
+        //     'products' => $products
+        // ];
+
+        $course  = new CourseModel();
+        $courses = $course->getAllCourse(); // result
         $data = [
-            'products' => $products
+            "course" => $courses
         ];
-        
+
         Header::render();
         Notification::render();
         NotificationHelper::unset();
         Home::render($data);
+        // var_dump($course);
         Footer::render();
     }
 }
