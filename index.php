@@ -18,7 +18,7 @@ require_once 'config.php';
 AuthHelper::middleware();
 
 // *** Client
-Route::get('/', 'App\Controllers\Client\HomeController@index');
+Route::get('/', 'App\Controllers\Client\HomeController@index'); 
 Route::get('/products', 'App\Controllers\Client\ProductController@index');
 Route::get('/products/{id}', 'App\Controllers\Client\ProductController@detail');
 Route::get('/products/categories/{id}', 'App\Controllers\Client\ProductController@getProductByCategory');
@@ -31,6 +31,27 @@ Route::get('/logout', 'App\Controllers\Client\AuthController@logout');
 Route::get('/study', 'App\Controllers\Client\StudyController@study');
 Route::get('/Post', 'App\Controllers\Client\PostController@index');
 Route::get('/contact', 'App\Controllers\Client\ContactController@index');
+
+
+
+// *** client lesson
+Route::get('/', 'App\Controllers\Client\HomeController@index');
+Route::get('/lessons', 'App\Controllers\Client\LessonController@index');
+Route::get('/lessons/{id}', 'App\Controllers\Client\LessonController@detail');
+Route::get('/lessons/categories/{id}', 'App\Controllers\Client\LessonController@getProductByCategory');
+Route::get('/register', 'App\Controllers\Client\AuthController@register');
+Route::post('/register', 'App\Controllers\Client\AuthController@registerAction');
+Route::get('/login', 'App\Controllers\Client\AuthController@login');
+Route::post('/login', 'App\Controllers\Client\AuthController@loginAction');
+Route::get('/logout', 'App\Controllers\Client\AuthController@logout');
+
+Route::get('/study', 'App\Controllers\Client\StudyController@study');
+Route::get('/Post', 'App\Controllers\Client\PostController@index');
+Route::get('/contact', 'App\Controllers\Client\ContactController@index');
+
+
+
+
 
 
 
