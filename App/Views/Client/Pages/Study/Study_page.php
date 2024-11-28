@@ -12,7 +12,35 @@ class Study_page extends BaseView
 {
     public static function render($data = null)
     {
-?>
+        ?>
+        <script src="">
+            function loadLessonDetails(lessonId) {
+                if (!lessonId) {
+                    document.getElementById('lesson-details').innerHTML = '<p>Vui lòng chọn bài học</p>';
+                    return;
+                }
+
+                fetch(`/lessons/${lessonId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Lỗi khi tải bài học');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const lessonDetails = `
+                                        <h3>${data.title_lesson}</h3>
+                                        <p>${data.src}</p>
+                                    `;
+                        document.getElementById('lesson-details').innerHTML = lessonDetails;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('lesson-details').innerHTML = '<p>Lỗi khi tải nội dung bài học</p>';
+                    });
+            }
+
+        </script>
 
         <body>
             <br>
@@ -20,12 +48,14 @@ class Study_page extends BaseView
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid navbar-1">
                         <a class="navbar-brand" href="#">
-                            <img src="/public/uploads/image/2.jpg" alt="Logo" width="50px" height="45px" class="d-inline-block align-text-center">
+                            <img src="/public/uploads/image/2.jpg" alt="Logo" width="50px" height="45px"
+                                class="d-inline-block align-text-center">
                         </a>
                         <h4 class="text-sourse">Tên Bài Học</h4>
                         <div class="_actions_k7irp_67">
                             <div class="_progress-bar_k7irp_73">
-                                <div class="_pie-wrapper_1iwxq_1 progress-45 style-2" style="--size: 34px; --progress: 0; --bar-width: 2px; --shadow-border-color: #4d4f50;">
+                                <div class="_pie-wrapper_1iwxq_1 progress-45 style-2"
+                                    style="--size: 34px; --progress: 0; --bar-width: 2px; --shadow-border-color: #4d4f50;">
                                     <div class="_pie_1iwxq_1">
                                         <div class="_left-side_1iwxq_39 _half-circle_1iwxq_28"></div>
                                     </div>
@@ -35,21 +65,20 @@ class Study_page extends BaseView
                                     </div>
                                 </div>
                             </div>
-                        <button class="_action-btn_k7irp_110" data-tour=""><span class="_label_k7irp_137">9/12</span>
-                        </button>
-                        <button class="_action-btn_k7irp_110" data-tour=""><span class="_label_k7irp_137">Ghi chú</span>
-                        </button>
-                        <button class="_action-btn_k7irp_110" data-tour=""><span class="_label_k7irp_137">Ghi chú</span>
-                        </button>
-                            
+                            <button class="_action-btn_k7irp_110" data-tour=""><span class="_label_k7irp_137">9/12</span>
+                            </button>
+                            <button class="_action-btn_k7irp_110" data-tour=""><span class="_label_k7irp_137">Ghi chú</span>
+                            </button>
+                            <button class="_action-btn_k7irp_110" data-tour=""><span class="_label_k7irp_137">Ghi chú</span>
+                            </button>
+
                         </div>
                     </div>
                 </nav>
                 <div class="row">
                     <div class="col-9">
                         <div class="ratio ratio-16x9">
-                            <iframe width="100" height="315" src="https://www.youtube.com/embed/7ig2lXjozdw?si=Wi2xY5EjMFjNYPL3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/-jV06pqjUUc?si=jsTzkccI8xiqgu-S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-3">
@@ -57,21 +86,30 @@ class Study_page extends BaseView
                             <h5>Nội dung khóa học</h5>
                             <div class="selection">
                                 <select class="form-select" aria-label="Default select example">
-                                    <h5>Khái niệm</h5>
+
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
+
+                                    <?php if (!empty($data['lessons'])): ?>
+                                        <?php foreach ($data['lessons'] as $lesson): ?>
+                                            <option>
+                                                <?= htmlspecialchars($lesson['title_lesson'] ?? 'Chưa có tiêu đề') ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <option value="">Không có bài học nào</option>
+                                    <?php endif; ?>
+
+
                                 </select>
                             </div>
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+
+
                         </div>
                     </div>
                 </div>
-                <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <p>Javascript có thể làm được gì? </p>
             </div>
             <div class="container">
                 <div class="col-md-9">
@@ -85,6 +123,6 @@ class Study_page extends BaseView
 
         </html>
 
-<?php
+        <?php
     }
 }
