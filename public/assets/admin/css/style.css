@@ -1,0 +1,60 @@
+:root {
+    --primary-color: #4caf50; /* Xanh lá hiện đại */
+    --secondary-color: #ffffff; /* Trắng */
+    --accent-color: #ff5722; /* Cam nhạt */
+    --background-color: #f8f9fa; /* Xám nhạt */
+    --text-color: #333333; /* Màu chữ chính */
+}
+body {
+    font-family: 'Roboto', sans-serif; /* Font hiện đại */
+    /* background-color: var(--background-color); */
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Topbar */
+
+/* Sidebar */
+.left-sidebar {
+    /* background-color: var(--primary-color); */
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.left-sidebar .sidebar-nav ul li a {
+    color: var(--secondary-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.left-sidebar .sidebar-nav ul li a:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* Buttons */
+.btn-cyan {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cyan:hover {
+    background-color: var(--accent-color);
+}
+
+/* Header */
+.navbar-dark {
+    /* background-color: var(--primary-color); */
+    /* border-bottom: 2px solid var(--accent-color); */
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
