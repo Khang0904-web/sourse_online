@@ -11,7 +11,7 @@ class Header extends BaseView
     {
         unset($_SESSION['user']);
         $is_login = AuthHelper::checkLogin();
-?>
+        ?>
 
 
         <!DOCTYPE html>
@@ -46,6 +46,7 @@ class Header extends BaseView
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
             <link rel="stylesheet" href="public/assets/css/style.css">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
 
         </head>
@@ -63,24 +64,42 @@ class Header extends BaseView
                 data-kt-app-sidebar-push-footer="true" class="app-default">
                 <!--begin::Theme mode setup on page load-->
                 <script>
-                    var defaultThemeMode = "light";
-                    var themeMode;
-                    if (document.documentElement) {
-                        if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
-                            themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
-                        } else {
-                            if (localStorage.getItem("data-bs-theme") !== null) {
-                                themeMode = localStorage.getItem("data-bs-theme");
-                            } else {
-                                themeMode = defaultThemeMode;
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const themeModeButtons = document.querySelectorAll("[data-kt-element='mode']");
+
+                        // Load theme mode from localStorage or default to system mode
+                        let themeMode = localStorage.getItem("data-bs-theme") || "system";
+                        applyThemeMode(themeMode);
+
+                        // Function to apply theme mode
+                        function applyThemeMode(mode) {
+                            if (mode === "system") {
+                                mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
                             }
+                            document.documentElement.setAttribute("data-bs-theme", mode);
+                            localStorage.setItem("data-bs-theme", mode);
                         }
-                        if (themeMode === "system") {
-                            themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-                        }
-                        document.documentElement.setAttribute("data-bs-theme", themeMode);
-                    }
+
+                        // Add event listeners for buttons
+                        themeModeButtons.forEach(button => {
+                            button.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                const mode = this.getAttribute("data-kt-value");
+                                applyThemeMode(mode);
+                            });
+                        });
+                    });
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const toggleButton = document.getElementById("kt_app_sidebar_mobile_toggle");
+                        const sidebar = document.getElementById("kt_app_sidebar");
+
+                        toggleButton.addEventListener("click", function () {
+                            sidebar.classList.toggle("active"); // Add or remove the "active" class
+                        });
+                    });
+
                 </script>
+
                 <!--end::Theme mode setup on page load-->
                 <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
                     <!--begin::Page-->
@@ -106,21 +125,19 @@ class Header extends BaseView
                                     <!--end::Sidebar toggle-->
                                 </div>
                                 <!--end::Logo-->
-                                <div class="item-nav d-flex flex-lg-grow-1 flex-stack" id="kt_app_header_wrapper">                                 
-                                            
-                                            <div class="container my-4">
-                                                <div class="d-flex gap-3 flex-wrap justify-content-center align-items-center">
-                                                    <div class="search-bar position-relative">
-                                                        <i class="bi bi-search search-icon"></i>
-                                                        <input type="text" 
-                                                            class="search-input" 
-                                                            placeholder="Tìm kiếm khóa học, bài viết, video, ..." 
-                                                            >
-                                                    </div>
-                                                </div>
+                                <div class="item-nav d-flex flex-lg-grow-1 flex-stack" id="kt_app_header_wrapper">
+
+                                    <div class="container my-4">
+                                        <div class="d-flex gap-3 flex-wrap justify-content-center align-items-center">
+                                            <div class="search-bar position-relative">
+                                                <i class="bi bi-search search-icon"></i>
+                                                <input type="text" class="search-input"
+                                                    placeholder="Tìm kiếm khóa học, bài viết, video, ...">
                                             </div>
-                                        
-                                                                      
+                                        </div>
+                                    </div>
+
+
                                     <div class="app-navbar flex-shrink-0 gap-2 gap-lg-4">
 
                                         <!--end::Notifications-->
@@ -129,18 +146,20 @@ class Header extends BaseView
                                             <?php if ($is_login): ?>
                                                 <li class="nav-item">
                                                     <div class="dropdown show">
-                                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                                            id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
                                                             Tài khoản
                                                         </a>
-
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <a class="dropdown-item" href="/users/<?= $_SESSION['user']['id'] ?>"><?= $_SESSION['user']['username'] ?></a>
+                                                            <a class="dropdown-item" href="/users/<?= $_SESSION['user']['id'] ?>">
+                                                                <?= $_SESSION['user']['username'] ?>
+                                                            </a>
                                                             <a class="dropdown-item" href="/change-password">Đổi mật khẩu</a>
-                                                            <!-- <a class="nav-link" href="/logout">Đăng xuất</a>     -->
                                                             <a class="dropdown-item" href="/logout">Đăng xuất</a>
                                                         </div>
                                                     </div>
+
                                                 </li>
 
 
@@ -171,32 +190,52 @@ class Header extends BaseView
                                 data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
                                 <!--begin::Primary menu-->
                                 <div id="kt_aside_menu_wrapper"
-                                    class="app-sidebar-menu flex-grow-1 hover-scroll-y scroll-lg-ps my-5 pt-8" data-kt-scroll="true"
-                                    data-kt-scroll-height="auto"
+                                    class="app-sidebar-menu flex-grow-1 hover-scroll-y scroll-lg-ps my-5 pt-8"
+                                    data-kt-scroll="true" data-kt-scroll-height="auto"
                                     data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
                                     data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
                                     <!--begin::Menu-->
                                     <div class="sidebar1">
                                         <a href="/" class="menu-item active">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                class="bi bi-house-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                                                <path
+                                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
                                             </svg>
                                             Trang chủ
                                         </a>
-                                       
+
                                         <a href="/Post" class="menu-item">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z" />
-                                                <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                class="bi bi-newspaper" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z" />
+                                                <path
+                                                    d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z" />
                                             </svg>
                                             Bài viết
                                         </a>
                                         <a href="/contact" class="menu-item">
-                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="road" class="svg-inline--fa fa-road " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                                <path fill="currentColor" d="M256 32H181.2c-27.1 0-51.3 17.1-60.3 42.6L3.1 407.2C1.1 413 0 419.2 0 425.4C0 455.5 24.5 480 54.6 480H256V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64H521.4c30.2 0 54.6-24.5 54.6-54.6c0-6.2-1.1-12.4-3.1-18.2L455.1 74.6C446 49.1 421.9 32 394.8 32H320V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32z"></path>
+                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="road"
+                                                class="svg-inline--fa fa-road " role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 576 512">
+                                                <path fill="currentColor"
+                                                    d="M256 32H181.2c-27.1 0-51.3 17.1-60.3 42.6L3.1 407.2C1.1 413 0 419.2 0 425.4C0 455.5 24.5 480 54.6 480H256V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64H521.4c30.2 0 54.6-24.5 54.6-54.6c0-6.2-1.1-12.4-3.1-18.2L455.1 74.6C446 49.1 421.9 32 394.8 32H320V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32z">
+                                                </path>
                                             </svg>
                                             Liên hệ
+                                        </a>
+                                        <a href="/study" class="menu-item">
+                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="road"
+                                                class="svg-inline--fa fa-road " role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 576 512">
+                                                <path fill="currentColor"
+                                                    d="M256 32H181.2c-27.1 0-51.3 17.1-60.3 42.6L3.1 407.2C1.1 413 0 419.2 0 425.4C0 455.5 24.5 480 54.6 480H256V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64H521.4c30.2 0 54.6-24.5 54.6-54.6c0-6.2-1.1-12.4-3.1-18.2L455.1 74.6C446 49.1 421.9 32 394.8 32H320V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32z">
+                                                </path>
+                                            </svg>
+                                            học bài
                                         </a>
                                     </div>
                                 </div>
@@ -215,37 +254,37 @@ class Header extends BaseView
                                     <!--begin::Menu-->
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px"
                                         data-kt-menu="true" data-kt-element="theme-mode-menu">
-                                        <!--begin::Menu item-->
+                                        <!-- Menu item: Light mode -->
                                         <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
-                                                <span class="menu-icon" data-kt-element="icon">
+                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
+                                                data-kt-value="light">
+                                                <span class="menu-icon">
                                                     <i class="ki-outline ki-night-day fs-2"></i>
                                                 </span>
                                                 <span class="menu-title">Light</span>
                                             </a>
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
+                                        <!-- Menu item: Dark mode -->
                                         <div class="menu-item px-3 my-0">
                                             <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
-                                                <span class="menu-icon" data-kt-element="icon">
+                                                <span class="menu-icon">
                                                     <i class="ki-outline ki-moon fs-2"></i>
                                                 </span>
                                                 <span class="menu-title">Dark</span>
                                             </a>
                                         </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
+                                        <!-- Menu item: System mode -->
                                         <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
-                                                <span class="menu-icon" data-kt-element="icon">
+                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
+                                                data-kt-value="system">
+                                                <span class="menu-icon">
                                                     <i class="ki-outline ki-screen fs-2"></i>
                                                 </span>
                                                 <span class="menu-title">System</span>
                                             </a>
                                         </div>
-                                        <!--end::Menu item-->
                                     </div>
+
                                     <!--end::Menu-->
                                 </div>
                                 <!--end::Footer-->
@@ -266,8 +305,8 @@ class Header extends BaseView
 
 
 
-                                        <?php
-                                    }
-                                }
+                                                <?php
+    }
+}
 
-                                        ?>
+?>
