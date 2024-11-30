@@ -11,7 +11,7 @@ class LessonModel extends BaseModel{
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $courseId);
         $stmt->execute();
-        return  $stmt->get_result()->fetch_all(); // Array
+        return  $stmt->get_result()->fetch_all(); 
     }
 
 
@@ -21,6 +21,6 @@ class LessonModel extends BaseModel{
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $lessonId);
         $stmt->execute();
-        return  $stmt->get_result()->fetch_all(); // Array
+        return  $stmt->get_result()->fetch_all(); 
     }
 }
